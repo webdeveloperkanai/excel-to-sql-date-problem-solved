@@ -15,15 +15,15 @@ if (isset($_POST['submit'])) {
 			for ($i = 1; $i <= $getHighestRow; $i++) {
 				$name = $sheet->getCellByColumnAndRow(0, $i + 1)->getValue();
 				$email = $sheet->getCellByColumnAndRow(1, $i + 1)->getValue();
-				$phone = $sheet->getCellByColumnAndRow(2, $i + 1)->getValue();
+				$date = $sheet->getCellByColumnAndRow(2, $i + 1)->getValue();
 
 				date_default_timezone_set("Asia/Kolkata");
 				$dDate = date_create_from_format('Y-m-d', '1900-01-01');
-				$dDate = date_add($dDate, date_interval_create_from_date_string(($phone - 2) . ' days'));
+				$dDate = date_add($dDate, date_interval_create_from_date_string(($date - 2) . ' days'));
 				$dos = $dDate->format('d-M-Y');
   
 				if ($name != '') {
-					mysqli_query($con, "insert into user(name,email, phone) values('$name','$email', '$dos')");
+					mysqli_query($con, "insert into user(name,email, date) values('$name','$email', '$dos')");
 				}
 			}
 		}
